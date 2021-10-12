@@ -4,6 +4,8 @@ info:
   description: Be the change you wish to see in the world
   version: 0.1.0
 servers:
+  - url: /api
+    description: this
   - url: http://localhost:43200/api
     description: dev
   - url: https://stark-badlands-90167.herokuapp.com/api
