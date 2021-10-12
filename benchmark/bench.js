@@ -3,7 +3,7 @@ var fs = require('fs')
 
 const service = {
     dev: 'http://localhost:43200/api/', 
-    prod: 'https://polar-caverns-93735.herokuapp.com/api/'
+    cloud: 'https://fierce-earth-47000.herokuapp.com//api/'
 }
 
 const routes = {
