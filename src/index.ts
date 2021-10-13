@@ -34,7 +34,7 @@ const ormParams:ConnectionOptions = {
     database: process.env.MYSQL_DATABASE,
     "entities": [`${entitiesPath}/*${entitiesExtension}`],
     "logging": false,
-    "synchronize": true,
+    "synchronize": false,
     "bigNumberStrings": false,
 }
 
@@ -44,7 +44,7 @@ throng({workers: WORKERS, start: start});
 async function start( id:number ) {
 
     try {
-        const params = id == 1 ? { ...ormParams } : { ...ormParams, loggin: true, synchronize: true }
+        let params:ConnectionOptions = id == 1 ? { ...ormParams, logging: true, synchronize: true } :  { ...ormParams }
         const connection = await createConnection(params)
 
         if ( id == 1 ) {
