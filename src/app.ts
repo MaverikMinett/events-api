@@ -8,7 +8,7 @@ import { Controller } from './interfaces/controller.interface';
 export class App {
     public app: Application
 
-    constructor( controllers:Controller[], public port: number ) {
+    constructor( controllers:Controller[], public port: number, public verbose:boolean = false ) {
         this.app = express()
 
         this.app.get("/", (request: Request, response: Response) => {
@@ -60,7 +60,8 @@ export class App {
         // logging
         this.app.use( 
             (request: Request, response: Response, next:NextFunction ) => {
-                console.log(`${request.method} ${request.path}`)
+                if ( this.verbose )
+                    console.log(`${request.method} ${request.path}`)
                 next()
             }
         )
@@ -68,8 +69,9 @@ export class App {
     }
 
     public listen() {
-        this.app.listen( this.port, () => {
-            console.log(`Server started at http://localhost:${ this.port }/api`)
+        return this.app.listen( this.port, () => {
+            if ( this.verbose )
+                console.log(`Server started at http://localhost:${ this.port }/api`)
         })
     }
 }

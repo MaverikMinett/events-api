@@ -142,6 +142,21 @@ components:
             type: string
             enum: [ "open", "sold out" ]
 paths:
+  /ping:
+    get:
+      summary: Ping Pong
+      tags: [ ping ]
+      responses:
+        '200':
+          description: Everything is OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message: 
+                    type: string
+                    example: pong
   /events:
     get:
       summary: Returns a list of events

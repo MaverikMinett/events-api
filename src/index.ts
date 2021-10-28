@@ -13,6 +13,7 @@ import populateMockData from './mockdata';
 
 import path from 'path'
 import throng from 'throng'
+import { PingController } from './controllers/ping.controller';
 
 
 const entitiesPath = __dirname + '/entities'
@@ -28,7 +29,7 @@ const WORKERS = process.env.WEB_CONCURRENCY || 1;
 const ormParams:ConnectionOptions = {
     type: "mysql",
     host: process.env.MYSQL_HOST,
-    port: process.env.MYSQL_HOST ? parseInt(process.env.MYSQL_HOST) : 3306,
+    port: process.env.MYSQL_PORT ? parseInt(process.env.MYSQL_PORT) : 3306,
     username: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
@@ -58,7 +59,8 @@ async function start( id:number ) {
         console.log(`Started worker ${id}`)
         
         const app = new App([
-            new EventsController()
+            new EventsController(),
+            new PingController(),
         ],  PORT )
         app.listen()
     }
